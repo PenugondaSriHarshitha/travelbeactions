@@ -2,6 +2,7 @@ package travel.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,11 +26,13 @@ public class Booking {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+   
     @Column(name = "checkin")
-    private LocalDateTime checkin;
+    private LocalDate checkin;
 
+    // ✅ changed to LocalDate (was LocalDateTime)
     @Column(name = "checkout")
-    private LocalDateTime checkout;
+    private LocalDate checkout;
 
     @Column(name = "nights")
     private Integer nights;
@@ -58,6 +61,12 @@ public class Booking {
     @Column(name = "status", length = 50)
     private String status = "pending";
 
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
     public Booking() {}
 
     @PrePersist
@@ -67,7 +76,7 @@ public class Booking {
         }
     }
 
-    // --- Getters & Setters ---
+    // ---- Getters & Setters ----
     public Long getBookingId() { return bookingId; }
     public void setBookingId(Long bookingId) { this.bookingId = bookingId; }
 
@@ -83,11 +92,11 @@ public class Booking {
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public LocalDateTime getCheckin() { return checkin; }
-    public void setCheckin(LocalDateTime checkin) { this.checkin = checkin; }
+    public LocalDate getCheckin() { return checkin; }
+    public void setCheckin(LocalDate checkin) { this.checkin = checkin; }
 
-    public LocalDateTime getCheckout() { return checkout; }
-    public void setCheckout(LocalDateTime checkout) { this.checkout = checkout; }
+    public LocalDate getCheckout() { return checkout; }
+    public void setCheckout(LocalDate checkout) { this.checkout = checkout; }
 
     public Integer getNights() { return nights; }
     public void setNights(Integer nights) { this.nights = nights; }
@@ -115,4 +124,23 @@ public class Booking {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public Double getLatitude() { return latitude; }
+    public void setLatitude(Double latitude) { this.latitude = latitude; }
+
+    public Double getLongitude() { return longitude; }
+    public void setLongitude(Double longitude) { this.longitude = longitude; }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "bookingId=" + bookingId +
+                ", userId=" + userId +
+                ", type='" + type + '\'' +
+                ", city='" + city + '\'' +
+                ", checkin=" + checkin +
+                ", guests=" + guests +
+                ", total=" + total +
+                '}';
+    }
 }

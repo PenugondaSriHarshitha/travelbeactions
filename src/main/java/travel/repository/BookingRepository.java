@@ -1,3 +1,4 @@
+// src/main/java/travel/repository/BookingRepository.java
 package travel.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,12 +9,12 @@ import java.util.List;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-    // Search by city (e.g., Goa, Hyderabad)
+    // 🔍 Find bookings where the city name partially matches (case-insensitive)
     List<Booking> findByCityContainingIgnoreCase(String city);
 
-    // Search by booking type (e.g., stay, flight, car)
+    // 🔍 Find bookings by exact type (e.g., "stay", "car", "flight")
     List<Booking> findByTypeIgnoreCase(String type);
 
-    // Combined search: city + type
+    // Optional — find bookings that match both city and type
     List<Booking> findByCityContainingIgnoreCaseAndTypeIgnoreCase(String city, String type);
 }
